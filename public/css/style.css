@@ -2540,7 +2540,6 @@ p.cart a {
 	width: 96.3333%;
 	outline: none;
 	-webkit-appearance: none;
-	text-transform: capitalize;
 }
 .contact-form textarea{
 	resize:none;

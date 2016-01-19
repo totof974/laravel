@@ -810,7 +810,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="col-md-3 cust">
             <h4>CUSTOMER CARE</h4>
-            <li><a href="#">Help Center</a></li>
+            <li><a href="{{ route('go_back') }}">Feedback</a></li>
             <li><a href="#">FAQ</a></li>
             <li><a href="#">How To Buy</a></li>
             <li><a href="#">Delivery</a></li>

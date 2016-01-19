@@ -34,6 +34,18 @@ Route::get('/notre-equipe',
         'as'=> "route_team",
     ]);
 
+Route::get('/test-age/{age}', [
+    'uses' => 'MainController@info',
+    'as' => 'route_age'
+]);
+
+Route::get('/produits/{prod}', [
+    'uses' => 'ProductController@show_prod',
+    'as' => 'route_prod'
+]);
+
+
+
 
 
 
@@ -64,6 +76,22 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', [
         "uses" => "MainController@home",
         "as" => "home",
+    ]);
+
+    Route::any('/feedback',[
+        "uses" => "MainController@feed",
+        "as" => "go_back",
+    ]);
+
+    Route::any('/admin', [
+        "uses"=>"AdminController@admin",
+        "as"=>"route_admin",
+
+    ]);
+
+    Route::get('/admin/categories',[
+        "uses"=>"AdminController@cat",
+        "as"=>"route_cat",
     ]);
 
 });

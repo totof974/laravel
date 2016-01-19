@@ -14,6 +14,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Mail;
+use App\Product;
 
 class MainController extends Controller
 {
@@ -98,6 +99,13 @@ class MainController extends Controller
         return view("myteam",["teamblade"=>$equipes]);
     }
 
+
+    public function info($age)
+    {
+        dump($age);
+        die;
+    }
+
     public function contact(Request $request)
 
     {
@@ -144,6 +152,69 @@ class MainController extends Controller
 
     public function home()
     {
+        $products = Product::all();
+        dump($products);
+
         return view('accueil'); // accueil.blade.php
+    }
+
+
+    public function feed(Request $request)
+    {
+
+        if($request->isMethod('POST'))
+        {
+            $validator = Validator::make($request->all(),
+                [
+                    'page' => 'required|url',
+                    'bug' => 'required',
+                    'firstname' => 'required' ,
+                    'lastname' => 'required',
+                    'email' => 'required|email',
+                    'message' => 'required',
+                    "screenshot" => "image"
+
+                ],
+                [
+                    'message.required' => 'Expliquez nous le problème pour qu\'il soit corrigé',
+                    'required' => 'Attention le champ est vide',
+                ]);
+
+
+
+            if ($validator->fails())
+            {
+                return redirect()->route('go_back')
+                    ->withInput()
+                    ->withErrors($validator);
+            }
+
+            $nameScreenshot = false;
+
+            if($request->hasFile('screenshot'))
+            {
+                $image = $request->file('screenshot');
+                $destinationScreenshot = public_path().'/uploads/feedback';
+                $nameScreenshot = str_random(15).'.'.$image->getClientOriginalExtension();
+
+                $image->move($destinationScreenshot, $nameScreenshot);
+
+            }
+
+            Mail::send(['emails.feedback-email', 'emails.feedback-email-text'], ["data" =>
+            $request->all()], function ($message) use ($nameScreenshot) {
+                $message->from('c.bour974@gmail.com');
+                $message->subject("Rapport de satisfaction");
+                $message->to('c.bour974@gmail.com');
+                if ($nameScreenshot) {
+                    $message->attach(asset("/uploads/feedback/".$nameScreenshot) );
+                }
+            });
+
+            return redirect()->route('go_back')->with('successFeedback', 'Merci pour votre retour');
+        }
+
+
+        return view('feedback'); // feedback.blade.php
     }
 }
