@@ -66,32 +66,41 @@ Route::group(['middleware' => ['web']], function () {
 
     /* ANY = GET et POST*/
 
-    Route::any('/contact',
-        [
+        Route::any('/contact',
+            [
             "uses"=>"MainController@contact",
             'as'=> "route_contact"
+            ]);
+
+
+        Route::get('/', [
+            "uses" => "MainController@home",
+            "as" => "home",
+            ]);
+
+        Route::any('/feedback',[
+            "uses" => "MainController@feed",
+            "as" => "go_back",
+            ]);
+
+
+    Route::group(['prefix' => '/admin'], function() {
+
+        Route::any('/', [
+            "uses" => "AdminController@admin",
+            "as" => "route_admin",
+
         ]);
 
+        Route::get('/categories', [
+            "uses" => "AdminController@cat",
+            "as" => "route_cat",
+        ]);
 
-    Route::get('/', [
-        "uses" => "MainController@home",
-        "as" => "home",
-    ]);
-
-    Route::any('/feedback',[
-        "uses" => "MainController@feed",
-        "as" => "go_back",
-    ]);
-
-    Route::any('/admin', [
-        "uses"=>"AdminController@admin",
-        "as"=>"route_admin",
-
-    ]);
-
-    Route::get('/admin/categories',[
-        "uses"=>"AdminController@cat",
-        "as"=>"route_cat",
-    ]);
+        Route::any('/categories/ajouter', [
+            "uses" => "AdminController@cat_add",
+            "as" => "route_cat_add"
+        ]);
+    });
 
 });

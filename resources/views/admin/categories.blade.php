@@ -13,9 +13,10 @@
                         <h3 class="box-title">Responsive Hover Table</h3>
                         <div class="box-tools">
                             <div class="input-group" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control input-sm pull-right" placeholder="Search">
+
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                                    <button class="btn btn-sm btn-default"><i class="fa fa-plus-square-o">  Ajouter</i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -26,6 +27,7 @@
                                 <th>ID</th>
                                 <th>Nom</th>
                                 <th>Image</th>
+                                <th>Actions</th>
 
                             </tr>
                             @foreach($cat_tab as $cat)
@@ -33,6 +35,8 @@
                                 <td>{{ $cat->id }}</td>
                                 <td>{{ $cat->name }}</td>
                                 <td>{{ $cat->image }}</td>
+                                <td><button><i class="fa fa-times">  Supprimer</i></button>
+                                    </td>
                             </tr>
                             @endforeach
                         </table>
