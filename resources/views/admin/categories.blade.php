@@ -35,7 +35,7 @@
                                 <td>{{ $cat->id }}</td>
                                 <td>{{ $cat->name }}</td>
                                 <td>{{ $cat->image }}</td>
-                                <td><button><i class="fa fa-times">  Supprimer</i></button>
+                                <td><a class="btn btn-danger" href="{{ route('route_cat_supp', ['cat' => $cat->id]) }}"><i class="fa fa-times">  Supprimer</i></a>
                                     </td>
                             </tr>
                             @endforeach
@@ -45,4 +45,20 @@
             </div>
         </div>
 
+@endsection
+
+
+
+@section('javascripts')
+    <script>
+        $(document).ready(function()
+        {
+            $(".btn-danger").click(function(event){
+                if(!confirm("Êtes vous sûr de vouloir supprimer définitivement une catégorie?"))
+                {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
 @endsection

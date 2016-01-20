@@ -77,6 +77,13 @@ class AdminController extends Controller
         return view('admin/ajout-cat');
     }
 
+    public function cat_supp($cat)
+    {
+        Category::findOrFail($cat)->delete();
+
+        return redirect()->route('route_cat')->with('success', 'Votre catégorie a bien été supprimée');
+    }
+
 
 
 }

@@ -666,8 +666,9 @@
 <!-- ChartJS 1.0.1 -->
 <script src="{{ asset('assets-admin/plugins/chartjs/Chart.min.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('assets-admin/js/pages/dashboard2.js') }}"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets-admin/js/demo.js') }}"></script>
+@yield('javascripts')
 </body>
 </html>

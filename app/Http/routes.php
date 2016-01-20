@@ -101,6 +101,11 @@ Route::group(['middleware' => ['web']], function () {
             "uses" => "AdminController@cat_add",
             "as" => "route_cat_add"
         ]);
+
+        Route::any('/categories/supprimer/{cat}', [
+            "uses" => "AdminController@cat_supp",
+            "as" => "route_cat_supp" ,
+        ]);
     });
 
 });

@@ -73,3 +73,10 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
 //ModelFactory : usine a catégorie
 
 
+// Installation de la librairie permettant de se connecter à twitter
+https://twitteroauth.com/
+
+// Documentation de l'api de twitter
+https://dev.twitter.com/rest/public
+
+
